@@ -11,6 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run a one-line script
       run: ls -lar
+    - run: pwd
     - name: Display hostname
       run: hostname -a
   slack:
