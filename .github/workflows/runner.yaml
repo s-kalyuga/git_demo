@@ -1,0 +1,15 @@
+name: Test for self-runner
+
+on: [push]
+
+jobs:
+  build:
+    #runs-on: ubuntu-latest
+    runs-on: [my_runner]
+    steps:
+    - run: echo "The ${{ github.repository }} repository will be cloned to the runner."
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: ls -lar
+    - name: Display hostname
+      run: hostname -a
