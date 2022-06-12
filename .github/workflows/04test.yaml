@@ -22,7 +22,8 @@ jobs:
       - name: List all changed files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed" >> files.log
+            tab_str=`grep -P '\t' $file | wc -l`
+        echo "$tab_str strings with TABs in changed file: $file" >> files.log
           done
       - name: Upload report
         uses: actions/upload-artifact@v2
