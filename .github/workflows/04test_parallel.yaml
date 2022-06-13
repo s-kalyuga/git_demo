@@ -21,7 +21,7 @@ jobs:
   check:
     strategy:
       matrix:
-          check-files: [${{ steps.changed-files.outputs.all_changed_files }}]
+          check-files: [datefile.txt, newtest.txt]
     runs-on: ubuntu-latest
     steps:
       - name: Check file for TABs
