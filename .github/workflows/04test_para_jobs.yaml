@@ -32,15 +32,25 @@ jobs:
   check:
     runs-on: ubuntu-latest
     needs: prepare
-    strategy:
-      matrix:
-          check-files: [${{needs.prepare.steps.changed-files.outputs.all_changed_files }}]
-	steps:
-      - name: Check file for TABs
-        run: |
-            tab_str=`grep -P '\t' ${{ matrix.check-files }} | wc -l`
-            echo "$tab_str strings with TABs in changed file: ${{ matrix.check-files }}" >> ${{ matrix.check-files }}.log
+#    strategy:
+#      matrix:
+#          check-files: [${{needs.prepare.steps.changed-files.outputs.all_changed_files }}]
+    steps:
+      - name: List all changed files
+        run: echo "${{ needs.prepare.steps.changed-files.outputs.all_changed_files }}" >> changed-files-2check.log
+
       - name: Upload report
         uses: actions/upload-artifact@v2
         with:
-          path: ${{ matrix.check-files }}.log
+          path: changed-files-2check.log
+          
+          
+          
+#      - name: Check file for TABs
+#        run: |
+#            tab_str=`grep -P '\t' ${{ matrix.check-files }} | wc -l`
+#            echo "$tab_str strings with TABs in changed file: ${{ matrix.check-files }}" >> ${{ matrix.check-files }}.log
+#      - name: Upload report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          path: ${{ matrix.check-files }}.log
