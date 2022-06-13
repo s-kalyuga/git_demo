@@ -19,28 +19,13 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v23
         with:
-          separator: ", "
+          separator: ","
 
       - name: List all changed files
-        run: echo ${{ steps.changed-files.outputs.all_changed_files }}; >> changed-files.log
+        run: echo ${{ steps.changed-files.outputs.all_changed_files }}; > changed-files.log
 
       - name: Upload report
         uses: actions/upload-artifact@v2
         with:
           path: changed-files.log
 
-
-  check:
-    strategy:
-      matrix:
-          check-files: [datefile.txt, newtest.txt]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check file for TABs
-        run: |
-            tab_str=`grep -P '\t' ${{ matrix.check-files }} | wc -l`
-            echo "$tab_str strings with TABs in changed file: ${{ matrix.check-files }}" >> ${{ matrix.check-files }}.log
-      - name: Upload report
-        uses: actions/upload-artifact@v2
-        with:
-          path: ${{ matrix.check-files }}.log
