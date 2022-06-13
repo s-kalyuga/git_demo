@@ -36,8 +36,9 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        check-files: [.github/workflows/04test_para_jobs.yaml, datefile.txt]
-    steps:
+#        check-files: [.github/workflows/04test_para_jobs.yaml, datefile.txt]
+        check-files: ${{ needs.prepare.outputs.all-changed-files }} 
+  steps:
 #     - name: List all changed files
 #       run: echo "${{ needs.prepare.outputs.all-changed-files }}" >> changed-files-2check.log
 
