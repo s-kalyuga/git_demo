@@ -36,7 +36,7 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        check-files: ${{ needs.prepare.outputs.all-changed-files }}
+        check-files: ${{ fromJson(needs.prepare.outputs.all-changed-files) }}
     steps:
 #     - name: List all changed files
 #       run: echo "${{ needs.prepare.outputs.all-changed-files }}" >> changed-files-2check.log
