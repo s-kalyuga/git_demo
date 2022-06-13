@@ -10,6 +10,8 @@ on:
 jobs:
   prepare:
     runs-on: ubuntu-latest
+    outputs:
+      all-changed-files: ${{ steps.changed-files.outputs.all_changed_files }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -37,7 +39,7 @@ jobs:
 #          check-files: [${{needs.prepare.steps.changed-files.outputs.all_changed_files }}]
     steps:
       - name: List all changed files
-        run: echo "${{ needs.prepare.steps.changed-files.outputs.all_changed_files }}" >> changed-files-2check.log
+        run: echo "${{ needs.prepare.outputs.all-changed-files }}" >> changed-files-2check.log
 
       - name: Upload report
         uses: actions/upload-artifact@v2
