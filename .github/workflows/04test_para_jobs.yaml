@@ -45,6 +45,7 @@ jobs:
 #        uses: actions/upload-artifact@v2
 #        with:
 #          path: changed-files-2check.log
+      - uses: actions/checkout@v2
       - name: Check file for TABs
         run: |
             tab_str=`grep -P '\t' ${{ matrix.check-files }} | wc -l`
