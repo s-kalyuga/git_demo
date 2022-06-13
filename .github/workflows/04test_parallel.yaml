@@ -22,7 +22,7 @@ jobs:
           separator: ","
 
       - name: List all changed files
-        run: echo ${{ steps.changed-files.outputs.all_changed_files }}; > changed-files.log
+        run: echo "${{ steps.changed-files.outputs.all_changed_files }}" >> changed-files.log
 
       - name: Upload report
         uses: actions/upload-artifact@v2
