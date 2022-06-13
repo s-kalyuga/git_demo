@@ -21,7 +21,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v23
         with:
-          separator: ", "
+          separator: ","
 
       - name: List all changed files
         run: echo "${{ steps.changed-files.outputs.all_changed_files }}" >> changed-files.log
@@ -36,7 +36,7 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        check-files: ${{ fromJson(needs.prepare.outputs.all-changed-files) }}
+        check-files: ${{ needs.prepare.outputs.all-changed-files }}
     steps:
 #     - name: List all changed files
 #       run: echo "${{ needs.prepare.outputs.all-changed-files }}" >> changed-files-2check.log
