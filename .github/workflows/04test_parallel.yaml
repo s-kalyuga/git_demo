@@ -18,6 +18,18 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v23
+        with:
+          separator: ", "
+
+      - name: List all changed files
+        run: echo ${{ steps.changed-files.outputs.all_changed_files }}; >> changed-files.log
+
+      - name: Upload report
+        uses: actions/upload-artifact@v2
+        with:
+          path: changed-files.log
+
+
   check:
     strategy:
       matrix:
