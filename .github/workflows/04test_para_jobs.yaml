@@ -47,7 +47,7 @@ jobs:
  
     steps:
       - name: List all changed files
-        run: echo "${{ needs.prepare.outputs.all-changed-files }}" >> changed-files-2check.log
+        run: echo "${{ matrix.check-files }}" >> changed-files-2check.log
 
       - name: Upload report
         uses: actions/upload-artifact@v2
