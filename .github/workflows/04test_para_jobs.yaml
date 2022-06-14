@@ -50,9 +50,9 @@ jobs:
        run: echo "${{ needs.prepare.outputs.all-changed-files }}" >> changed-files-2check.log
 
      - name: Upload report
-        uses: actions/upload-artifact@v2
-        with:
-          path: changed-files-2check.log
+       uses: actions/upload-artifact@v2
+       with:
+         path: changed-files-2check.log
 #      - uses: actions/checkout@v2
         #      - name: Check file for TABs
         #        run: |
