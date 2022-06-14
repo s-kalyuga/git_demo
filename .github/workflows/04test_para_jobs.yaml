@@ -23,14 +23,19 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v23
         with:
-          separator: "\",\""
+          separator: " "
 
       - name: List all changed files
         run: echo "${{ steps.changed-files.outputs.all_changed_files }}" >> changed-files.log
 
       - name: Setting output
         id: setting-output
-        run: echo "::set-output name=all-changed-files::[\"${{steps.changed-files.outputs.all_changed_files}}\"]"
+        run: | 
+          sudo apt-get install jq
+          files=`printf '%s\n' ${{ steps.changed-files.outputs.all_changed_files }} | jq -R . | jq -cs .`
+          echo "::set-output name=all-changed-files::$files"
+          echo "$files" >> changed-files.log
+          #          echo "::set-output name=all-changed-files::[\"${{steps.changed-files.outputs.all_changed_files}}\"]"
 
       - name: Upload report
         uses: actions/upload-artifact@v2
