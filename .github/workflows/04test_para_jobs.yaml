@@ -42,7 +42,7 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        check-files: ${{ needs.prepare.outputs.all-changed-files }}
+        check-files: ${{fromJSON(needs.prepare.outputs.all-changed-files)}}
 #        check-files: [.github/workflows/04test_para_jobs.yaml, datefile.txt]
  
     steps:
