@@ -30,7 +30,7 @@ jobs:
 
       - name: Setting output
         id: setting-output
-        run: echo "::set-output name=all-changed-files::${{ steps.changed-files.outputs.all_changed_files }}"
+        run: echo "::set-output name=all-changed-files::[${{steps.changed-files.outputs.all_changed_files}}]"
 
       - name: Upload report
         uses: actions/upload-artifact@v2
@@ -42,7 +42,7 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        check-files: ${{fromJSON(needs.prepare.outputs.all-changed-files)}}
+        check-files: ${{needs.prepare.outputs.all-changed-files}}
 #        check-files: [.github/workflows/04test_para_jobs.yaml, datefile.txt]
  
     steps:
