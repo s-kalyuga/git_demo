@@ -32,12 +32,12 @@ jobs:
         id: setting-output
         run: echo "::set-output name=all-changed-files::[\"${{steps.changed-files.outputs.all_changed_files}}\"]"
 
+      - run: echo "${{ prepare.outputs.all-changed-files }}" >> changed-files.log
+
       - name: Upload report
         uses: actions/upload-artifact@v2
         with:
           path: changed-files.log
-
-      - run: echo "${{outputs.all-changed-files}}" >> changed-files.log
 
   check:
     runs-on: ubuntu-latest
